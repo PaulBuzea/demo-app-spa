@@ -1,0 +1,65 @@
+<app-header></app-header>
+<div class="dashboard">
+  <div class="absence-form-container">
+    <form [formGroup]="absenceForm" (ngSubmit)="onSubmit()" class="absence-form">
+      <h2>Request Absence</h2>
+
+      <div class="form-group">
+        <label for="firstName">First Name *</label>
+        <input
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+          class="form-control"
+          [class.is-invalid]="absenceForm.get('firstName')?.invalid && absenceForm.get('firstName')?.touched"
+        />
+        <div class="error-message" *ngIf="absenceForm.get('firstName')?.invalid && absenceForm.get('firstName')?.touched">
+          <small *ngIf="absenceForm.get('firstName')?.errors?.['required']">First name is required</small>
+          <small *ngIf="absenceForm.get('firstName')?.errors?.['minlength']">First name must be at least 2 characters</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name *</label>
+        <input
+          type="text"
+          id="lastName"
+          formControlName="lastName"
+          class="form-control"
+          [class.is-invalid]="absenceForm.get('lastName')?.invalid && absenceForm.get('lastName')?.touched"
+        />
+        <div class="error-message" *ngIf="absenceForm.get('lastName')?.invalid && absenceForm.get('lastName')?.touched">
+          <small *ngIf="absenceForm.get('lastName')?.errors?.['required']">Last name is required</small>
+          <small *ngIf="absenceForm.get('lastName')?.errors?.['minlength']">Last name must be at least 2 characters</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="startDate">Start Date:</label>
+        <input id="startDate" type="date" formControlName="startDate" required>
+      </div>
+
+      <div class="form-group">
+        <label for="endDate">End Date:</label>
+        <input id="endDate" type="date" formControlName="endDate" required>
+      </div>
+
+      <div class="form-group">
+        <label for="reason">Reason:</label>
+        <select id="reason" formControlName="reason" required>
+          <option value="">Select a reason</option>
+          <option value="vacation">Vacation</option>
+          <option value="sick">Sick Leave</option>
+          <option value="personal">Personal Leave</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="comments">Comments (optional):</label>
+        <textarea id="comments" formControlName="comments" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="submit-button">Submit Request</button>
+    </form>
+  </div>
+</div>

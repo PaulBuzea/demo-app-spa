@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div class="dashboard">
+  <div class="table-container">
+    <table class="absence-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Comments</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of rowData">
+        <td>{{ row.id }}</td>
+        <td>
+          <span *ngIf="editableRowId !== row.id">{{ row.firstName }}</span>
+          <input *ngIf="editableRowId === row.id" type="text" [(ngModel)]="row.firstName" />
+        </td>
+        <td>
+          <span *ngIf="editableRowId !== row.id">{{ row.lastName }}</span>
+          <input *ngIf="editableRowId === row.id" type="text" [(ngModel)]="row.lastName" />
+        </td>
+        <td>
+          <span *ngIf="editableRowId !== row.id">{{ row.startDate | date }}</span>
+          <input *ngIf="editableRowId === row.id" type="date" [(ngModel)]="row.startDate" />
+        </td>
+        <td>
+          <span *ngIf="editableRowId !== row.id">{{ row.endDate | date }}</span>
+          <input *ngIf="editableRowId === row.id" type="date" [(ngModel)]="row.endDate" />
+        </td>
+        <td>
+          <span *ngIf="editableRowId !== row.id">{{ row.reason }}</span>
+          <select *ngIf="editableRowId === row.id" [(ngModel)]="row.reason">
+            <option value="Vacation">Vacation</option>
+            <option value="Sick Leave">Sick Leave</option>
+            <option value="Personal Leave">Personal Leave</option>
+          </select>
+        </td>
+        <td>
+          <span *ngIf="editableRowId !== row.id">{{ row.comments }}</span>
+          <input *ngIf="editableRowId === row.id" type="text" [(ngModel)]="row.comments" />
+        </td>
+        <td>
+          <div *ngIf="editableRowId !== row.id">
+            <button (click)="startEditing(row.id)" class="btn-feedback">Edit</button>
+          </div>
+          <div *ngIf="editableRowId === row.id" class="action-buttons">
+            <button (click)="saveRow(row)" class="btn-submit">Save</button>
+            <button (click)="cancelEditing()" class="btn-cancel">Cancel</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

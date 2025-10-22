@@ -1,0 +1,83 @@
+.header {
+  display: flex;
+  justify-content: flex-end; /* Align header content to the far right */
+  align-items: center;
+  padding: 1rem;
+  width: 100%; /* Full width of the viewport */
+  background: #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid #d1d5db;
+}
+.header-content {
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
+  align-items: center;
+  width: 100%; /* Full width of the header */
+  max-width: 1200px; /* Optional: Limit maximum width */
+  padding: 0.5rem 1rem;
+}
+.role-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between role label and button */
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.current-role {
+  font-weight: bold;
+  color: #333;
+  margin-right: 20px;
+}
+
+.switch-user-button {
+  padding: 0.625rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.switch-user-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.35);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.switch-user-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .header-content {
+    padding: 0;
+  }
+
+  .role-section {
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .current-role {
+    font-size: 0.875rem;
+  }
+
+  .switch-user-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
