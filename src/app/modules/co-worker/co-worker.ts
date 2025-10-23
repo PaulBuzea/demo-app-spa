@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {AbsenceService} from '../../services/absence.service';
 import {AiFeedbackService} from '../../services/ai-feedback.service';
+import {catchError, of, switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-co-worker',
@@ -35,7 +36,7 @@ export class CoWorker implements OnInit {
 
   fetchAbsences() {
     this.loading = true;
-    this.absenceService.getAllAbsences()
+    this.absenceService.getAllAbsencesForCoWorker()
       .subscribe({
         next: (data) => {
           this.rowData = data;
@@ -61,11 +62,32 @@ export class CoWorker implements OnInit {
   }
 
   submitFeedback(rowId: number): void {
-    const feedback = this.feedbackText[rowId];
+    const feedbackText = this.feedbackText[rowId];
+    if (!feedbackText.trim()) return; // Skip if empty
 
-    if (feedback !== '') {
-      this.showPolishedFeedback(feedback);
-    }
+    this.absenceService.getAbsenceById(rowId).pipe(
+      switchMap((absence) =>
+        this.aiFeedback.polishMessage(feedbackText).pipe(
+          catchError((error) => {
+            console.error('Polishing failed:', error);
+            return of(feedbackText); // Fallback to original feedback
+          }),
+          switchMap((polishedFeedback) => {
+            absence.feedback = polishedFeedback;
+            return this.absenceService.updateAbsenceForCoWorker(absence);
+          })
+        )
+      ),
+      catchError((error) => {
+        console.error('Error updating absence:', error);
+        return of(null); // Gracefully handle errors
+      })
+    ).subscribe({
+      next: (response) => {
+        this.fetchAbsences(); // Refresh the list
+      },
+      error: (error) => console.error('Unexpected error:', error)
+    });
 
     this.closeFeedback();
     this.feedbackText[rowId] = '';

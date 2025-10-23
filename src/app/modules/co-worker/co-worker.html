@@ -9,7 +9,6 @@
         <th>Last Name</th>
         <th>Start Date</th>
         <th>End Date</th>
-        <th>Reason</th>
         <th>Action</th>
       </tr>
       </thead>
@@ -21,7 +20,6 @@
           <td>{{ row.lastName }}</td>
           <td>{{ row.startDate | date: 'MMM dd, yyyy' }}</td>
           <td>{{ row.endDate | date: 'MMM dd, yyyy' }}</td>
-          <td>{{ row.reason }}</td>
           <td>
             <button
               *ngIf="!isFeedbackOpen(row.id)"

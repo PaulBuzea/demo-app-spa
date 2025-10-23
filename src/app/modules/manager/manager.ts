@@ -28,7 +28,7 @@ export class Manager implements OnInit {
 
   fetchAbsences() {
     this.loading = true;
-    this.absenceService.getAllAbsences()
+    this.absenceService.getAllAbsencesForManager()
       .subscribe({
         next: (data) => {
           this.rowData = data;
@@ -46,7 +46,7 @@ export class Manager implements OnInit {
   }
 
   saveRow(row: any) {
-    this.absenceService.updateAbsence(row.id, row).subscribe({
+    this.absenceService.updateAbsenceForManager(row).subscribe({
       next: (response) => {
         console.log('Row saved successfully:', response);
         this.editableRowId = null;

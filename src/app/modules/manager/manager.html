@@ -11,6 +11,7 @@
         <th>End Date</th>
         <th>Reason</th>
         <th>Comments</th>
+        <th>Feedback</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -44,6 +45,10 @@
         <td>
           <span *ngIf="editableRowId !== row.id">{{ row.comments }}</span>
           <input *ngIf="editableRowId === row.id" type="text" [(ngModel)]="row.comments" />
+        </td>
+        <td>
+          <span *ngIf="editableRowId !== row.id">{{ row.feedback }}</span>
+          <input *ngIf="editableRowId === row.id" type="text" [(ngModel)]="row.feedback" />
         </td>
         <td>
           <div *ngIf="editableRowId !== row.id">

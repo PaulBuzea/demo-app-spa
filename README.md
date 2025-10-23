@@ -4,11 +4,21 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Development server
 
+To import all working libs, run:
+
+```bash
+npm install
+```
+
+
 To start a local development server, run:
 
 ```bash
 ng serve
 ```
+
+For the HuggingFace client, you have to insert you API Key on AiFeedbackService class.
+
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
